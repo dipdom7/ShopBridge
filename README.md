@@ -32,13 +32,13 @@ The solution consist following projects
 14. Run the service by double clicking on Shopbridge.exe
 
 # Test Endpoints
-Test endpoints using Postman tool. Update port 44361 with service listening port.
-1. GET- https://localhost:44361/api/inventory/{id}
-2. GET- https://localhost:44361/api/inventory?Name=i&PageNumber=1&PageSize=10 (Query Parameters are optional)
-3. POST- https://localhost:44361/api/inventory
+Test endpoints using Postman tool.
+1. GET- https://localhost:5001/api/inventory/{id}
+2. GET- https://localhost:5001/api/inventory?Name=i&PageNumber=1&PageSize=10 (Query Parameters are optional)
+3. POST- https://localhost:5001/api/inventory
 Body: form-data
-4. DELETE- https://localhost:44361/api/inventory/{id}
-5. PUT- https://localhost:44361/api/inventory/{id}
+4. DELETE- https://localhost:5001/api/inventory/{id}
+5. PUT- https://localhost:5001/api/inventory/{id}
 
 # Run Tests
 1. Go to ShopBridge.UnitTests -> InventoryUnitTestController and update connectionString with your local database connection string.
