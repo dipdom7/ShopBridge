@@ -26,7 +26,6 @@ namespace ShopBridge.Models
         [Column(TypeName = "nvarchar(100)")]
         public string ImageName { get; set; }
 
-        [DataType(DataType.Upload)]
         [NotMapped]
         public IFormFile ImageFile
         {

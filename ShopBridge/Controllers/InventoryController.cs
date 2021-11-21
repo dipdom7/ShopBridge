@@ -30,7 +30,7 @@ namespace ShopBridge.Controllers
             try
             {
                 var inventories = await _inventoryService.GetInventories(inventoryParameters);
-                if(inventories == null)
+                if (inventories == null)
                 {
                     return NotFound();
                 }
@@ -40,14 +40,14 @@ namespace ShopBridge.Controllers
             {
                 return BadRequest();
             }
-            
+
         }
 
         [HttpGet]
         [Route("api/[controller]/{id}")]
         public async Task<IActionResult> GetInventory(int? id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return BadRequest();
             }
@@ -64,23 +64,23 @@ namespace ShopBridge.Controllers
             {
                 return BadRequest();
             }
-            
+
         }
         [HttpPost]
         [Route("api/[controller]/")]
-        public async Task<IActionResult> AddInventoryAsync([FromForm]Inventory inventory)
+        public async Task<IActionResult> AddInventoryAsync([FromForm] Inventory inventory)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    if(inventory.ImageFile != null)
+                    if (inventory.ImageFile != null)
                     {
                         inventory.ImageName = await SaveImage(inventory.ImageFile);
                     }
-                   
-                    await _inventoryService.AddInventory(inventory);
-                    return Ok();
+
+                    var result = await _inventoryService.AddInventory(inventory);
+                    return Ok(result);
                 }
                 catch (Exception)
                 {
@@ -88,14 +88,14 @@ namespace ShopBridge.Controllers
                 }
             }
             return BadRequest();
-                
+
         }
 
         [HttpPut]
         [Route("api/[controller]/{id}")]
         public async Task<IActionResult> EditInventory(int? id, Inventory inventory)
         {
-            if(id == null)
+            if (id == null)
             {
                 return BadRequest();
             }
@@ -105,27 +105,28 @@ namespace ShopBridge.Controllers
             }
             try
             {
-                var dbInventory = await _inventoryService.GetInventory(id);
-                if (dbInventory != null)
+
+                inventory.Id = (int)id;
+                var result = await _inventoryService.EditInventory(id, inventory);
+                if (result == null)
                 {
-                    inventory.Id = (int)id;
-                    await _inventoryService.EditInventory(inventory);
-                    return Ok(inventory);
+                    return NotFound($"Inventory with id {id} is not found.");
                 }
-                return NotFound($"Inventory with id {id} is not found.");
+
+                return Ok(result);
             }
             catch (Exception e)
             {
                 return BadRequest();
             }
-           
+
 
         }
         [HttpDelete]
         [Route("api/[controller]/{id}")]
         public async Task<IActionResult> DeleteInventory(int? id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return BadRequest();
             }
@@ -143,7 +144,7 @@ namespace ShopBridge.Controllers
             {
                 return BadRequest();
             }
-            
+
 
         }
 
@@ -152,7 +153,7 @@ namespace ShopBridge.Controllers
         {
             string imageName = new String(Path.GetFileNameWithoutExtension(file.FileName).Take(10).ToArray()).Replace(' ', '-');
             imageName = imageName + DateTime.Now.ToString("yymmssfff") + Path.GetExtension(file.FileName);
-            var imagePath =  Path.Combine(_webHostEnvironment.ContentRootPath, "Images", imageName);
+            var imagePath = Path.Combine(_webHostEnvironment.ContentRootPath, "Images", imageName);
             using (var fileStream = new FileStream(imagePath, FileMode.Create))
             {
                 await file.CopyToAsync(fileStream);

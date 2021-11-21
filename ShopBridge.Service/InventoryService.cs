@@ -27,7 +27,14 @@ namespace ShopBridge.Service
         {
             _context.Inventories.Add(inventory);
             await _context.SaveChangesAsync();
-            return inventory;
+            Inventory result = new Inventory
+            {
+                Id = inventory.Id,
+                Name = inventory.Name,
+                Description = inventory.Description,
+                Price = inventory.Price
+            };
+            return result;
         }
 
         /// <summary>
@@ -46,13 +53,17 @@ namespace ShopBridge.Service
         /// </summary>
         /// <param name="inventory"></param>
         /// <returns>Inventory</returns>
-        public async Task<Inventory> EditInventory(Inventory dbInventory)
+        public async Task<Inventory> EditInventory(int? id, Inventory dbInventory)
         {
-            _context.Entry(dbInventory).State = EntityState.Modified;
-            //_context.Entry(InventoryMaster).State = EntityState.Modified;
-            _context.Inventories.Update(dbInventory);
-            await _context.SaveChangesAsync();
-            return dbInventory;
+            var inventory = await _context.Inventories.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
+            if( inventory != null)
+            {
+                _context.Inventories.Update(dbInventory);
+                await _context.SaveChangesAsync();
+                return inventory;
+            }
+            return null;
+           
         }
 
         /// <summary>
@@ -78,7 +89,13 @@ namespace ShopBridge.Service
         /// <returns>Inventory</returns>
         public async Task<Inventory> GetInventory(int? id)
         {
-            var inventory = await _context.Inventories.FindAsync(id);
+            var inventory = await _context.Inventories.SingleOrDefaultAsync(x=> x.Id ==id);
+            return inventory;
+        }
+
+        public async Task<Inventory> GetInventoryWithoutTracking(int? id)
+        {
+            var inventory = await _context.Inventories.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
             return inventory;
         }
 

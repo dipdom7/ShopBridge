@@ -135,7 +135,7 @@ namespace ShopBridge.UnitTests
             Assert.IsType<OkObjectResult>(data);
 
             var okResult = data as OkObjectResult;
-            var inventories =(List<Inventory>) okResult.Value;
+            var inventories = (List<Inventory>)okResult.Value;
 
             Assert.Equal("Bread", inventories[0].Name);
             Assert.Equal("Food", inventories[0].Description);
@@ -150,16 +150,16 @@ namespace ShopBridge.UnitTests
         public async void Task_AddInventory_ValidData_Return_OkResult()
         {
             //Arrange
-            var controller = new InventoryController(service ,null);
-            var inventory = new Inventory() { Name = "TV", Description = "Electronic Device", Price=25000 };
+            var controller = new InventoryController(service, null);
+            var inventory = new Inventory() { Name = "TV", Description = "Electronic Device", Price = 25000 };
 
             //Act
             var data = await controller.AddInventoryAsync(inventory);
 
             //Assert
-            Assert.IsType<OkResult>(data);
+            Assert.IsType<OkObjectResult>(data);
         }
-      
+
         [Fact]
         public async void Task_Add_ValidData_MatchResult()
         {

@@ -12,10 +12,12 @@ namespace ShopBridge.Service
 
         Task<Inventory> GetInventory(int? id);
 
+        Task<Inventory> GetInventoryWithoutTracking(int? id);
+
         Task<Inventory> AddInventory(Inventory inventory);
 
         Task DeleteInventory(Inventory inventory);
 
-        Task<Inventory> EditInventory(Inventory inventory);
+        Task<Inventory> EditInventory(int? id, Inventory inventory);
     }
 }
