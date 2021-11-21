@@ -21,7 +21,7 @@ namespace ShopBridge.DataAccess
         }
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
-            builder.UseSqlServer(@"Server=DESKTOP-LJ2O1A4;Database=ShopBridge;UID=db_user;PWD=Dogfood;");
+            builder.UseSqlServer(@"Server=DESKTOP-LJ2O1A4;Database=ShopBridge;UID=db_user;PWD=###;");
         }*/
         public DbSet<Inventory> Inventories { get; set; }
     }

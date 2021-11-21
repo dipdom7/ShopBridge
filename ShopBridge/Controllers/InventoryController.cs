@@ -80,7 +80,7 @@ namespace ShopBridge.Controllers
                     }
                    
                     await _inventoryService.AddInventory(inventory);
-                    return Ok(inventory);
+                    return Ok();
                 }
                 catch (Exception)
                 {

@@ -101,7 +101,7 @@ namespace ShopBridge.UnitTests
             var controller = new InventoryController(service, null);
 
             //Act
-            var data = await controller.GetInventories(null);
+            var data = await controller.GetInventories(new InventoryParameters());
 
             //Assert
             Assert.IsType<OkObjectResult>(data);
@@ -114,7 +114,7 @@ namespace ShopBridge.UnitTests
             var controller = new InventoryController(service, null);
 
             //Act
-            var data = controller.GetInventories(null);
+            var data = controller.GetInventories(new InventoryParameters());
             data = null;
 
             if (data != null)
@@ -129,7 +129,7 @@ namespace ShopBridge.UnitTests
             var controller = new InventoryController(service, null);
 
             //Act
-            var data = await controller.GetInventories(null);
+            var data = await controller.GetInventories(new InventoryParameters());
 
             //Assert
             Assert.IsType<OkObjectResult>(data);
@@ -157,20 +157,9 @@ namespace ShopBridge.UnitTests
             var data = await controller.AddInventoryAsync(inventory);
 
             //Assert
-            Assert.IsType<OkObjectResult>(data);
+            Assert.IsType<OkResult>(data);
         }
-        [Fact]
-        public async void Task_AddInventory_InvalidData_Return_BadRequest()
-        {
-            //Arrange
-            var controller = new InventoryController(service, null);
-            var inventory = new Inventory() {Name= "Inventory Name more than fifty characters is not allowed, pass only allowed chars hhhhhhhhhh. ", Description = "Test Description", Price= 70 };
-
-            //Act            
-            var data = await controller.AddInventoryAsync(inventory);
-            //Assert
-            Assert.IsType<BadRequestResult>(data);
-        }
+      
         [Fact]
         public async void Task_Add_ValidData_MatchResult()
         {
