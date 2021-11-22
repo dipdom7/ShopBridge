@@ -30,7 +30,8 @@ namespace ShopBridge
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContextPool<InventoryContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ShopBridgeConnection")));
+            services.AddDbContext<InventoryContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ShopBridgeConnection")), 
+                ServiceLifetime.Scoped);
             services.AddScoped<IInventoryService, InventoryService>();
         }
 

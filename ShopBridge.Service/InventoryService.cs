@@ -55,15 +55,22 @@ namespace ShopBridge.Service
         /// <returns>Inventory</returns>
         public async Task<Inventory> EditInventory(int? id, Inventory dbInventory)
         {
-            var inventory = await _context.Inventories.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
-            if( inventory != null)
+            var inventory = await _context.Inventories.Where(x => x.Id == id)
+                                                       .AsNoTracking().SingleOrDefaultAsync();
+            if (inventory == null)
+            {
+                return null;
+            }
+            bool tracking = _context.ChangeTracker.Entries<Inventory>().Any(x => x.Entity.Id == dbInventory.Id);
+            if (!tracking)
             {
                 _context.Inventories.Update(dbInventory);
-                await _context.SaveChangesAsync();
-                return inventory;
             }
-            return null;
-           
+ 
+
+            await _context.SaveChangesAsync();
+            
+            return inventory;
         }
 
         /// <summary>
@@ -89,7 +96,7 @@ namespace ShopBridge.Service
         /// <returns>Inventory</returns>
         public async Task<Inventory> GetInventory(int? id)
         {
-            var inventory = await _context.Inventories.SingleOrDefaultAsync(x=> x.Id ==id);
+            var inventory = await _context.Inventories.SingleOrDefaultAsync(x => x.Id == id);
             return inventory;
         }
 

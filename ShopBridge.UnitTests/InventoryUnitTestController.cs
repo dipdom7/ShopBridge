@@ -19,13 +19,14 @@ namespace ShopBridge.UnitTests
         static InventoryUnitTestController()
         {
             dbContextOptions = new DbContextOptionsBuilder<InventoryContext>()
-                .UseSqlServer(connectionString)
+                .UseSqlServer(connectionString )
                 .Options;
         }
 
         public InventoryUnitTestController()
         {
             var context = new InventoryContext(dbContextOptions);
+            context.Inventories.AsNoTracking();
             DummyDataDBInitializer db = new DummyDataDBInitializer();
             db.Seed(context);
             service = new InventoryService(context);
@@ -222,5 +223,25 @@ namespace ShopBridge.UnitTests
             Assert.IsType<BadRequestResult>(data);
         }
         #endregion
+
+        [Fact]
+        public async void Task_Update_ValidData_Return_OkResult()
+        {
+            //Arrange
+            var controller = new InventoryController(service, null);
+            var id = 2;
+
+            //Act
+          
+
+            var inventory = new Inventory();
+            inventory.Name = "Test Title 2 Updated";
+            inventory.Id = 2;
+          
+            var updatedData = await controller.EditInventory(id, inventory);
+
+            //Assert
+            Assert.IsType<OkObjectResult>(updatedData);
+        }
     }
 }
