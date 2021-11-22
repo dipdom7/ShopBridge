@@ -16,20 +16,23 @@ The solution consist following projects
 4. IIS should be installed
 
 # Deployment
-1. Make ShopBridge solution as a startup project.
-2. Go to appsettings.json and update ShopBridgeConnection.
-3. Right click on ShopBridge solution and click on Publish.
-4. Select Folder as a Target and click Next
-5. Provide local folder location and click on Finish.
-6. Expand Show all settings
-7. Expand Databases and check Use this connection string at runtime
-7. Expand Entity Framework Migrations and check Use this connection string at runtime
-9. Click on Save.
-10. Click on Publish.
-11. Now solution is publish on local folder location provided in step 5.
-12. Go to published folder ->EFSQLSCRIPTS and run sql scipt using SSMS in configured db.
-13. Create Images folder under published directory.
-14. Run the service by double clicking on Shopbridge.exe
+1. Download project from this repository.
+2. Right click on downloaded.zip, go to properties and check Unblock and apply changes.
+3. Unzip project and open ShopBridge.sln using Visual Studio.
+4. Make ShopBridge solution as a startup project.
+5. Go to appsettings.json and update ShopBridgeConnection.
+6. Right click on ShopBridge solution and click on Publish.
+7. Select Folder as a Target and click Next
+8. Provide local folder location and click on Finish.
+9. Expand Show all settings
+10. Expand Databases and check Use this connection string at runtime
+11. Expand Entity Framework Migrations and check Use this connection string at runtime
+12. Click on Save.
+13. Click on Publish.
+14. Now solution is publish on local folder location provided in step 5.
+15. Go to published folder ->EFSQLSCRIPTS and run sql scipt using SSMS in configured db.
+16. Create Images folder under published directory.
+17. Run the service by double clicking on Shopbridge.exe
 
 # Test Endpoints
 Test endpoints using Postman tool.
@@ -43,3 +46,9 @@ Body: form-data
 # Run Tests
 1. Go to ShopBridge.UnitTests -> InventoryUnitTestController and update connectionString with your local database connection string.
 2. Click on Test -> Run all tests
+
+# Estimations
+1. Data store design - 1hr
+2. API and Service logic - 3hr
+3. Unit Test Coverage - 1hr
+4. Documentation - 1hr
