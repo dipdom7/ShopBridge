@@ -184,8 +184,8 @@ namespace ShopBridge.UnitTests
         public async void Task_DeleteInventory_Post_Return_OkResult()
         {
             //Arrange
-            var controller = new InventoryController(service, null);
-            var id = 4;
+            InventoryController controller = new InventoryController(service, null);
+            int id = 4;
 
             //Act
             var data = await controller.DeleteInventory(id);
@@ -198,8 +198,8 @@ namespace ShopBridge.UnitTests
         public async void Task_DeleteInventory_Post_Return_NotFoundResult()
         {
             //Arrange
-            var controller = new InventoryController(service, null);
-            var id = 6;
+            InventoryController controller = new InventoryController(service, null);
+            int id = 6;
 
             //Act
             var data = await controller.DeleteInventory(id); ;

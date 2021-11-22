@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ShoBridge.Utils\ShopBridge.Utils.csproj" />
     <ProjectReference Include="..\ShopBridge.Models\ShopBridge.Models.csproj" />
   </ItemGroup>
 

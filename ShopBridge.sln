@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopBridge.DataAccess", "Sh
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopBridge.UnitTests", "ShopBridge.UnitTests\ShopBridge.UnitTests.csproj", "{4CAEAE0B-8E43-4F53-8005-C66B6A2A3FE5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopBridge.Utils", "ShoBridge.Utils\ShopBridge.Utils.csproj", "{6B95ABFF-FC73-4C81-8FAE-88996F298C48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopBridge.Utils", "ShopBridge.Utils\ShopBridge.Utils.csproj", "{6B95ABFF-FC73-4C81-8FAE-88996F298C48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
